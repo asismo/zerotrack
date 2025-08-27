@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-xl shadow-2xl w-full max-w-md m-4 relative animate-fade-in-up"
+        className="bg-white rounded-xl shadow-2xl w-full max-w-2xl m-4 relative animate-fade-in-up"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 border-b border-slate-200 flex justify-between items-center">
@@ -30,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
             <CloseIcon className="w-6 h-6" />
           </button>
         </div>
-        <div className="p-6">
+        <div className="p-6 max-h-[70vh] overflow-y-auto">
           {children}
         </div>
       </div>

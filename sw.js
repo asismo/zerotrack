@@ -1,7 +1,9 @@
+
 const CACHE_NAME = 'subscription-tracker-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/icon.svg',
   '/index.tsx',
   '/App.tsx',
   '/types.ts',
@@ -10,7 +12,9 @@ const urlsToCache = [
   '/components/Modal.tsx',
   '/components/SubscriptionForm.tsx',
   '/components/SubscriptionCard.tsx',
-  '/components/SubscriptionList.tsx'
+  '/components/SubscriptionList.tsx',
+  '/components/HistoryCard.tsx',
+  '/components/HelpModal.tsx'
 ];
 
 self.addEventListener('install', event => {

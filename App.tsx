@@ -6,11 +6,13 @@ import SubscriptionList from './components/SubscriptionList';
 import Modal from './components/Modal';
 import SubscriptionForm from './components/SubscriptionForm';
 import HistoryCard from './components/HistoryCard';
-import { PlusIcon, AlertTriangleIcon, EuroIcon, CheckCircleIcon, ArchiveIcon, ZeroIcon } from './components/icons';
+import HelpModal from './components/HelpModal';
+import { PlusIcon, AlertTriangleIcon, EuroIcon, CheckCircleIcon, ArchiveIcon, ZeroIcon, QuestionMarkCircleIcon } from './components/icons';
 
 const App: React.FC = () => {
   const { subscriptions, addSubscription, updateSubscription, deleteSubscription, loading } = useSubscriptions();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [subscriptionToEdit, setSubscriptionToEdit] = useState<Subscription | null>(null);
   const [sortKey, setSortKey] = useState<SortKey>('renewalDate');
 
@@ -58,6 +60,10 @@ const App: React.FC = () => {
     setSubscriptionToEdit(subscription);
     setIsModalOpen(true);
   };
+  
+  const openHelpModal = () => setIsHelpModalOpen(true);
+  const closeHelpModal = () => setIsHelpModalOpen(false);
+
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -191,14 +197,22 @@ const App: React.FC = () => {
       <header className="bg-white/80 backdrop-blur-lg sticky top-0 z-10 border-b border-slate-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-3">
-              <ZeroIcon className="w-8 h-8" />
-              <h1 className="text-3xl font-bold text-slate-900 tracking-tight">ZERO Track</h1>
+            <div className="flex items-center gap-4">
+              <ZeroIcon className="w-10 h-10" />
+              <div>
+                <h1 className="text-3xl font-bold text-slate-900 tracking-tight">ZERO Track</h1>
+                <p className="text-sm text-slate-500 -mt-1">Never overpay for subscriptions again.</p>
+              </div>
             </div>
-            <button onClick={openAddModal} className="flex items-center gap-2 px-4 py-2 bg-lime-600 text-white rounded-lg font-semibold shadow-md hover:bg-lime-700 transition-all transform hover:scale-105">
-              <PlusIcon className="w-5 h-5" />
-              <span>Add Subscription</span>
-            </button>
+            <div className="flex items-center gap-4">
+               <button onClick={openHelpModal} className="p-2 text-slate-500 hover:text-lime-600 hover:bg-lime-100 rounded-full transition-colors" aria-label="Help">
+                  <QuestionMarkCircleIcon className="w-6 h-6" />
+               </button>
+              <button onClick={openAddModal} className="flex items-center gap-2 px-4 py-2 bg-lime-600 text-white rounded-lg font-semibold shadow-md hover:bg-lime-700 transition-all transform hover:scale-105">
+                <PlusIcon className="w-5 h-5" />
+                <span>Add Subscription</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -341,6 +355,8 @@ const App: React.FC = () => {
           subscriptionToEdit={subscriptionToEdit} 
         />
       </Modal>
+
+      <HelpModal isOpen={isHelpModalOpen} onClose={closeHelpModal} />
     </div>
   );
 };
